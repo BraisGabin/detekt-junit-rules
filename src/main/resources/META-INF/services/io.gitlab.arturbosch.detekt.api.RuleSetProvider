@@ -1,1 +1,1 @@
-org.example.detekt.MyRuleSetProvider
+com.github.braisgabin.detektjunitrules.MyRuleSetProvider
