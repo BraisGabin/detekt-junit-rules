@@ -123,6 +123,38 @@ internal class CustomRuleSpec {
   }
 
   @Test
+  fun `report test function using runBlocking returning not Unit type`() {
+    val code = """
+      import org.junit.Test
+      import kotlinx.coroutines.runBlocking
+      
+      class A {
+        @Test
+        fun test() = runBlocking { 5 }
+      }
+      """
+
+    val findings = TestFunctionsShouldReturnUnit(Config.empty).compileAndLintWithContext(env.env, code)
+    assertThat(findings).hasSize(1)
+  }
+
+  @Test
+  fun `don't report test function using runBlocking returning Unit`() {
+    val code = """
+      import org.junit.Test
+      import kotlinx.coroutines.runBlocking
+      
+      class A {
+        @Test
+        fun test() = runBlocking { Unit }
+      }
+      """
+
+    val findings = TestFunctionsShouldReturnUnit(Config.empty).compileAndLintWithContext(env.env, code)
+    assertThat(findings).isEmpty()
+  }
+
+  @Test
   fun `don't report no test function`() {
     val code = """
       class A {
