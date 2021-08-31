@@ -21,7 +21,7 @@ dependencies {
   testImplementation("junit:junit:4.13.2")
 }
 
-tasks.withType<KotlinCompile>() {
+tasks.withType<KotlinCompile> {
   kotlinOptions.jvmTarget = "11"
 }
 
