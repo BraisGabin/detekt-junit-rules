@@ -4,8 +4,8 @@ import io.gitlab.arturbosch.detekt.api.Config
 import io.gitlab.arturbosch.detekt.api.RuleSet
 import io.gitlab.arturbosch.detekt.api.RuleSetProvider
 
-class JunitRuleSetProvider : RuleSetProvider {
-  override val ruleSetId: String = "Junit"
+class JUnitRuleSetProvider : RuleSetProvider {
+  override val ruleSetId: String = "JUnit"
 
   override fun instance(config: Config): RuleSet {
     return RuleSet(
