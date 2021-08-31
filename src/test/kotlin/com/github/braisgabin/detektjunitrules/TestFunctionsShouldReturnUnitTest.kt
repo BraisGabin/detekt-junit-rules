@@ -95,7 +95,7 @@ internal class CustomRuleSpec {
       
       class A {
         @Test
-        fun test() = same{5}
+        fun test() = same(5)
       }
 
       fun <T> same(value: T): T = value
