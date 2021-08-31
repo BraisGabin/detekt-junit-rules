@@ -1,1 +1,1 @@
-com.github.braisgabin.detektjunitrules.JUnitRuleSetProvider
+com.braisgabin.detekt.junit.JUnitRuleSetProvider

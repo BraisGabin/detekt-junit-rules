@@ -1,4 +1,4 @@
-package com.github.braisgabin.detektjunitrules
+package com.braisgabin.detekt.junit
 
 import io.gitlab.arturbosch.detekt.api.Config
 import io.gitlab.arturbosch.detekt.api.RuleSet

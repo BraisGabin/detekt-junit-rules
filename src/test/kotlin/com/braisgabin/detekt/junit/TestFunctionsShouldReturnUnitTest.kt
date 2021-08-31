@@ -1,4 +1,4 @@
-package com.github.braisgabin.detektjunitrules
+package com.braisgabin.detekt.junit
 
 import io.github.detekt.test.utils.KotlinCoreEnvironmentWrapper
 import io.github.detekt.test.utils.createEnvironment
