@@ -30,8 +30,6 @@ class TestFunctionsShouldReturnUnit(config: Config) : Rule(config) {
       return
     }
 
-    println(function.returnsUnit())
-
     if (function.hasAnnotation("Test") && function.returnsUnit() == false) {
       report(
         CodeSmell(
