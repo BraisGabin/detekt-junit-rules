@@ -1,33 +1,33 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
-    kotlin("jvm") version "1.5.21"
-    `maven-publish`
+  kotlin("jvm") version "1.5.21"
+  `maven-publish`
 }
 
 group = "com.github.braisgabin.detektjunitrules"
 version = "1.0-SNAPSHOT"
 
 repositories {
-    mavenCentral()
+  mavenCentral()
 }
 
 dependencies {
-    implementation("io.gitlab.arturbosch.detekt:detekt-api:1.18.0")
+  implementation("io.gitlab.arturbosch.detekt:detekt-api:1.18.0")
 
-    testImplementation("io.gitlab.arturbosch.detekt:detekt-test:1.18.0")
-    testImplementation("org.assertj:assertj-core:3.20.2")
-    testImplementation("junit:junit:4.13.2")
+  testImplementation("io.gitlab.arturbosch.detekt:detekt-test:1.18.0")
+  testImplementation("org.assertj:assertj-core:3.20.2")
+  testImplementation("junit:junit:4.13.2")
 }
 
 tasks.withType<KotlinCompile>() {
-    kotlinOptions.jvmTarget = "11"
+  kotlinOptions.jvmTarget = "11"
 }
 
 publishing {
-    publications {
-        create<MavenPublication>("mavenJava") {
-            from(components["java"])
-        }
+  publications {
+    create<MavenPublication>("mavenJava") {
+      from(components["java"])
     }
+  }
 }
