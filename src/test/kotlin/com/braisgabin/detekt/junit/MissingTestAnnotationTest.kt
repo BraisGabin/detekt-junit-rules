@@ -136,13 +136,14 @@ internal class MissingTestAnnotationTest {
   }
 
   @Test
-  fun `don't report functions annotated with BeforeAll, BeforeEach, AfterEach or AfterAll Junit5`() {
+  fun `don't report functions annotated with BeforeAll, BeforeEach, AfterEach, AfterAll or ParameterizedTest Junit5`() {
     val code = """
       import org.junit.jupiter.api.AfterAll
       import org.junit.jupiter.api.AfterEach
       import org.junit.jupiter.api.BeforeAll
       import org.junit.jupiter.api.BeforeEach
       import org.junit.jupiter.api.Test
+      import org.junit.jupiter.params.ParameterizedTest
 
       class A {
         @BeforeAll
@@ -163,6 +164,56 @@ internal class MissingTestAnnotationTest {
 
         @Test
         fun test() {
+        }
+
+        @ParameterizedTest
+        fun test2() {
+        }
+      }
+      """
+
+    val findings = MissingTestAnnotation(Config.empty).compileAndLintWithContext(env.env, code)
+    assertThat(findings).isEmpty()
+  }
+
+  @Test
+  fun `don't report override functions`() {
+    val code = """
+      import org.junit.jupiter.api.extension.ExtensionContext
+      import org.junit.jupiter.params.provider.Arguments
+      import org.junit.jupiter.params.provider.ArgumentsProvider
+      import java.util.stream.Stream
+
+      class A : ArgumentsProvider {
+        override fun provideArguments(context: ExtensionContext?): Stream<out Arguments> {
+          TODO()
+        }
+      }
+      """
+
+    val findings = MissingTestAnnotation(Config.empty).compileAndLintWithContext(env.env, code)
+    assertThat(findings).isEmpty()
+  }
+
+
+  @Test
+  fun `don't report functions in private classes without @Test`() {
+    val code = """
+      import org.junit.Test
+
+      class A {
+        @Test
+        fun test() {
+        }
+
+        private class B {
+          private fun test2() {
+          }
+        }
+      }
+
+      private class C {
+        private fun test3() {
         }
       }
       """
