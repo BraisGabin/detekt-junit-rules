@@ -8,7 +8,7 @@ Add this to your module gradle configuration:
 
 ```kotlin
 dependencies {
-  detektPlugins("com.github.BraisGabin:detekt-junit-rules:0.0.3")
+  detektPlugins("com.github.BraisGabin:detekt-junit-rules:0.0.4")
 }
 ```
 

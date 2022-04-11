@@ -1,6 +1,6 @@
 # Change Log
 
-## Next Release
+## Version 0.0.4 *(2022-04-12)*
 - Update kotlin to 1.6.20
 - Implement `MissingTestAnnotationTest`
 
