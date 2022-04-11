@@ -9,7 +9,7 @@ import org.junit.After
 import org.junit.Before
 import org.junit.Test
 
-internal class CustomRuleSpec {
+internal class TestFunctionsShouldReturnUnitTest {
 
   private lateinit var env: KotlinCoreEnvironmentWrapper
 
