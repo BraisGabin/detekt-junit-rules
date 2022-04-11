@@ -16,7 +16,7 @@ dependencies {
   compileOnly("io.gitlab.arturbosch.detekt:detekt-api:1.18.0")
 
   testImplementation("io.gitlab.arturbosch.detekt:detekt-test:1.18.0")
-  testImplementation("io.gitlab.arturbosch.detekt:detekt-test-utils:1.18.0")
+  testImplementation("io.gitlab.arturbosch.detekt:detekt-test-utils:1.19.0")
   testImplementation("org.assertj:assertj-core:3.22.0")
   testImplementation("junit:junit:4.13.2")
   testImplementation("org.junit.jupiter:junit-jupiter-api:5.8.2")
