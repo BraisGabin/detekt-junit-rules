@@ -40,11 +40,12 @@ class MissingTestAnnotation(config: Config) : Rule(config) {
         "AfterEach",
         "BeforeAll",
         "AfterAll",
+        "ParameterizedTest",
         "Before",
         "After",
         "BeforeClass",
         "AfterClass",
-        "ParameterizedTest",
+        "Parameters",
       )
       && !function.isPrivate()
       && !function.isOverride()

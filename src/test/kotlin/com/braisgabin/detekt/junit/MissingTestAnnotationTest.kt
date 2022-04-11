@@ -100,13 +100,14 @@ internal class MissingTestAnnotationTest {
   }
 
   @Test
-  fun `don't report functions annotated with BeforeClass, Before, After or AfterClass Junit4`() {
+  fun `don't report functions annotated with BeforeClass, Before, After, AfterClass or Parameterized_Parameters Junit4`() {
     val code = """
       import org.junit.After
       import org.junit.AfterClass
       import org.junit.Before
       import org.junit.BeforeClass
       import org.junit.Test
+      import org.junit.runners.Parameterized
 
       class A {
         @BeforeClass
@@ -127,6 +128,14 @@ internal class MissingTestAnnotationTest {
 
         @Test
         fun test() {
+        }
+
+        companion object {
+          @JvmStatic
+          @Parameterized.Parameters
+          fun data(): Iterable<Array<Any>> {
+              TODO()
+          }
         }
       }
       """
