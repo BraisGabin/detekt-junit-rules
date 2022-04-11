@@ -169,6 +169,10 @@ internal class MissingTestAnnotationTest {
         @ParameterizedTest
         fun test2() {
         }
+
+        @ParameterizedTest(name = "Hello")
+        fun test3() {
+        }
       }
       """
 
