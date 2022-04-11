@@ -12,6 +12,8 @@ import io.gitlab.arturbosch.detekt.rules.isOverride
 import org.jetbrains.kotlin.psi.KtFile
 import org.jetbrains.kotlin.psi.KtNamedFunction
 import org.jetbrains.kotlin.psi.psiUtil.containingClass
+import org.jetbrains.kotlin.psi.psiUtil.containingClassOrObject
+import org.jetbrains.kotlin.psi.psiUtil.isObjectLiteral
 import org.jetbrains.kotlin.psi.psiUtil.isPrivate
 
 class MissingTestAnnotation(config: Config) : Rule(config) {
@@ -31,7 +33,8 @@ class MissingTestAnnotation(config: Config) : Rule(config) {
   override fun visitNamedFunction(function: KtNamedFunction) {
     super.visitNamedFunction(function)
 
-    val clazz = function.containingClass() ?: return
+    val clazz = function.containingClassOrObject ?: return
+    if (clazz.name == null) return
 
     if (
       !function.hasAnnotation(

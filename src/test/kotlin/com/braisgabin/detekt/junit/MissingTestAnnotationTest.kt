@@ -44,6 +44,25 @@ internal class MissingTestAnnotationTest {
   }
 
   @Test
+  fun `report function without @Test in objects`() {
+    val code = """
+      import org.junit.Test
+      
+      object A {
+        @Test
+        fun test() {
+        }
+
+        fun test2() {
+        }
+      }
+      """
+
+    val findings = MissingTestAnnotation(Config.empty).compileAndLintWithContext(env.env, code)
+    assertThat(findings).hasSize(1)
+  }
+
+  @Test
   fun `Don't report function if in the class there is no junit imports`() {
     val code = """
       class A {
@@ -218,7 +237,6 @@ internal class MissingTestAnnotationTest {
     assertThat(findings).isEmpty()
   }
 
-
   @Test
   fun `don't report functions in private classes without @Test`() {
     val code = """
@@ -237,6 +255,27 @@ internal class MissingTestAnnotationTest {
 
       private class C {
         private fun test3() {
+        }
+      }
+      """
+
+    val findings = MissingTestAnnotation(Config.empty).compileAndLintWithContext(env.env, code)
+    assertThat(findings).isEmpty()
+  }
+
+  @Test
+  fun `don't report functions in anonymous objects without @Test`() {
+    val code = """
+      import org.junit.Test
+
+      class A {
+        @Test
+        fun test() {
+        }
+
+        private val foo = object {
+          fun test2() {
+          }
         }
       }
       """
