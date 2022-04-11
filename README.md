@@ -30,4 +30,4 @@ JUnit:
     active: true
 ```
 
-  [jitpack]: https://jitpack.io/
+  [jitpack]: https://jitpack.io/#BraisGabin/detekt-junit-rules
