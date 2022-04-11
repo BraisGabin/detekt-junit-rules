@@ -1,3 +1,6 @@
 JUnit:
+  active: true
   TestFunctionsShouldReturnUnit:
+    active: true
+  MissingTestAnnotation:
     active: true
