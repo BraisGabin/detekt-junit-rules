@@ -30,7 +30,21 @@ class MissingTestAnnotation(config: Config) : Rule(config) {
   override fun visitNamedFunction(function: KtNamedFunction) {
     super.visitNamedFunction(function)
 
-    if (!function.hasAnnotation("Test") && !function.isPrivate() && function.containingClass() != null) {
+    if (
+      !function.hasAnnotation(
+        "Test",
+        "BeforeEach",
+        "AfterEach",
+        "BeforeAll",
+        "AfterAll",
+        "Before",
+        "After",
+        "BeforeClass",
+        "AfterClass"
+      )
+      && !function.isPrivate()
+      && function.containingClass() != null
+    ) {
       report(
         CodeSmell(
           issue,

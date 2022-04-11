@@ -80,7 +80,6 @@ internal class MissingTestAnnotationTest {
     assertThat(findings).isEmpty()
   }
 
-
   @Test
   fun `don't report private functions without @Test`() {
     val code = """
@@ -92,6 +91,78 @@ internal class MissingTestAnnotationTest {
         }
 
         private fun test2() {
+        }
+      }
+      """
+
+    val findings = MissingTestAnnotation(Config.empty).compileAndLintWithContext(env.env, code)
+    assertThat(findings).isEmpty()
+  }
+
+  @Test
+  fun `don't report functions annotated with BeforeClass, Before, After or AfterClass Junit4`() {
+    val code = """
+      import org.junit.After
+      import org.junit.AfterClass
+      import org.junit.Before
+      import org.junit.BeforeClass
+      import org.junit.Test
+
+      class A {
+        @BeforeClass
+        fun setUpClass() {
+        }
+
+        @Before
+        fun setUp() {
+        }
+
+        @After
+        fun tearDown() {
+        }
+
+        @AfterClass
+        fun tearDownClass() {
+        }
+
+        @Test
+        fun test() {
+        }
+      }
+      """
+
+    val findings = MissingTestAnnotation(Config.empty).compileAndLintWithContext(env.env, code)
+    assertThat(findings).isEmpty()
+  }
+
+  @Test
+  fun `don't report functions annotated with BeforeAll, BeforeEach, AfterEach or AfterAll Junit5`() {
+    val code = """
+      import org.junit.jupiter.api.AfterAll
+      import org.junit.jupiter.api.AfterEach
+      import org.junit.jupiter.api.BeforeAll
+      import org.junit.jupiter.api.BeforeEach
+      import org.junit.jupiter.api.Test
+
+      class A {
+        @BeforeAll
+        fun setUpClass() {
+        }
+
+        @BeforeEach
+        fun setUp() {
+        }
+
+        @AfterEach
+        fun tearDown() {
+        }
+
+        @AfterAll
+        fun tearDownClass() {
+        }
+
+        @Test
+        fun test() {
         }
       }
       """

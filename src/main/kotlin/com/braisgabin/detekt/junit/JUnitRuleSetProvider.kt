@@ -11,6 +11,7 @@ class JUnitRuleSetProvider : RuleSetProvider {
     return RuleSet(
       ruleSetId,
       listOf(
+        MissingTestAnnotation(config),
         TestFunctionsShouldReturnUnit(config),
       ),
     )
