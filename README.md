@@ -16,7 +16,7 @@ Right now the project is on [jitpack]. So you need to have that repo configured 
 
 ## Configuration
 
-Remember that, by default, all the rules aren't enable. To activate the rule you need to write something like this in your
+Remember that, by default, all the rules aren't enable. To activate the ruls you need to write something like this in your
 yaml configuration:
 
 ```yaml
@@ -27,6 +27,8 @@ config:
 
 JUnit:
   TestFunctionsShouldReturnUnit:
+    active: true
+  MissingTestAnnotation:
     active: true
 ```
 
