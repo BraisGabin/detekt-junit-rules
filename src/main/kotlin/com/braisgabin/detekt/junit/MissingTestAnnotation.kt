@@ -36,11 +36,13 @@ class MissingTestAnnotation(config: Config) : Rule(config) {
     if (
       !function.hasAnnotation(
         "Test",
+        "RepeatedTest",
         "BeforeEach",
         "AfterEach",
         "BeforeAll",
         "AfterAll",
         "ParameterizedTest",
+        "TestFactory",
         "Before",
         "After",
         "BeforeClass",

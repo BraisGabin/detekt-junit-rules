@@ -151,7 +151,9 @@ internal class MissingTestAnnotationTest {
       import org.junit.jupiter.api.AfterEach
       import org.junit.jupiter.api.BeforeAll
       import org.junit.jupiter.api.BeforeEach
+      import org.junit.jupiter.api.RepeatedTest
       import org.junit.jupiter.api.Test
+      import org.junit.jupiter.api.TestFactory
       import org.junit.jupiter.params.ParameterizedTest
 
       class A {
@@ -181,6 +183,14 @@ internal class MissingTestAnnotationTest {
 
         @ParameterizedTest(name = "Hello")
         fun test3() {
+        }
+
+        @RepeatedTest(10)
+        fun test4() {
+        }
+
+        @TestFactory
+        fun test5() {
         }
       }
       """
