@@ -9,6 +9,7 @@ import io.gitlab.arturbosch.detekt.api.Rule
 import io.gitlab.arturbosch.detekt.api.Severity
 import io.gitlab.arturbosch.detekt.rules.hasAnnotation
 import org.jetbrains.kotlin.psi.KtClassOrObject
+import org.jetbrains.kotlin.psi.KtFile
 
 class UnnecesaryNested(config: Config) : Rule(config) {
   override val issue = Issue(
@@ -20,6 +21,17 @@ class UnnecesaryNested(config: Config) : Rule(config) {
 
   override fun visitClassOrObject(classOrObject: KtClassOrObject) {
     if (classOrObject.hasAnnotation("Nested")) {
+      if (classOrObject.parent is KtFile) {
+        report(
+          CodeSmell(
+            issue,
+            Entity.atName(classOrObject),
+            "The class ${classOrObject.name.orEmpty()} is top-level so it doesn't need to be annotated with `@Nested`.",
+          )
+        )
+        return
+      }
+
       val body = classOrObject.body
       if (body == null || body.declarations.isEmpty()) {
         report(
@@ -29,6 +41,7 @@ class UnnecesaryNested(config: Config) : Rule(config) {
             "The class ${classOrObject.name.orEmpty()} is empty so it doesn't need to be annotated with `@Nested`.",
           )
         )
+        return
       }
     }
 
