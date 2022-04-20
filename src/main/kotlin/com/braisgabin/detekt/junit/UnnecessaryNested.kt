@@ -18,7 +18,7 @@ class UnnecessaryNested(config: Config) : Rule(config) {
   override val issue = Issue(
     javaClass.simpleName,
     Severity.CodeSmell,
-    "A @Nested class should always contain at least one @Test or more than one @Nested. And class shouldn't only contain one @Nested",
+    "A `@Nested` `class` should always contain at least one `@Test` or more than one `@Nested`. And class shouldn't only contain one `@Nested`.",
     Debt.FIVE_MINS,
   )
 
@@ -31,7 +31,7 @@ class UnnecessaryNested(config: Config) : Rule(config) {
           CodeSmell(
             issue,
             Entity.atName(classOrObject),
-            "The class ${classOrObject.name.orEmpty()} is top-level so it doesn't need to be annotated with `@Nested`.",
+            "The class '${classOrObject.name.orEmpty()}' is top-level so it doesn't need to be annotated with `@Nested`",
           )
         )
         return
@@ -43,7 +43,7 @@ class UnnecessaryNested(config: Config) : Rule(config) {
           CodeSmell(
             issue,
             Entity.atName(classOrObject),
-            "The class ${classOrObject.name.orEmpty()} is empty so it doesn't need to be annotated with `@Nested`.",
+            "The class '${classOrObject.name.orEmpty()}' is empty so it doesn't need to be annotated with `@Nested`",
           )
         )
         return
@@ -54,7 +54,7 @@ class UnnecessaryNested(config: Config) : Rule(config) {
           CodeSmell(
             issue,
             Entity.atName(classOrObject),
-            "The class ${classOrObject.name.orEmpty()} could be removed because it is the only child inside its parent`.",
+            "The class '${classOrObject.name.orEmpty()}' could be removed because it is the only child inside its parent`",
           )
         )
         return

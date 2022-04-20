@@ -20,7 +20,7 @@ class MissingTestAnnotation(config: Config) : Rule(config) {
   override val issue = Issue(
     javaClass.simpleName,
     Severity.CodeSmell,
-    "If a file has an `org.junit` import all the non private functions inside a class should be annotated with `@Test`",
+    "If a file has an `org.junit` import all the non private functions inside a class should be annotated with `@Test`.",
     Debt.FIVE_MINS,
   )
 
@@ -60,7 +60,7 @@ class MissingTestAnnotation(config: Config) : Rule(config) {
         CodeSmell(
           issue,
           Entity.atName(function),
-          "Missing annotation `@Test` on the function ${function.name.orEmpty()}",
+          "Missing annotation `@Test` on the function '${function.name.orEmpty()}'",
         )
       )
     }
