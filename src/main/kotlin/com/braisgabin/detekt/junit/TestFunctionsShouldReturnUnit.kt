@@ -20,7 +20,7 @@ class TestFunctionsShouldReturnUnit(config: Config) : Rule(config) {
   override val issue = Issue(
     javaClass.simpleName,
     Severity.CodeSmell,
-    "The functions annotated with @Test should return Unit",
+    "The functions annotated with @Test should return Unit.",
     Debt.FIVE_MINS,
   )
 
@@ -35,7 +35,7 @@ class TestFunctionsShouldReturnUnit(config: Config) : Rule(config) {
         CodeSmell(
           issue,
           Entity.atName(function),
-          "The function ${function.name.orEmpty()} should return Unit",
+          "The function '${function.name.orEmpty()}' should return Unit",
         )
       )
     }
