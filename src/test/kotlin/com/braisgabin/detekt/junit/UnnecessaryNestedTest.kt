@@ -8,7 +8,7 @@ import org.jetbrains.kotlin.cli.jvm.compiler.KotlinCoreEnvironment
 import org.junit.jupiter.api.Test
 
 @KotlinCoreEnvironmentTest
-internal class UnnecesaryNestedTest(private val env: KotlinCoreEnvironment) {
+internal class UnnecessaryNestedTest(private val env: KotlinCoreEnvironment) {
 
   @Test
   fun `reports an empty Nested`() {
@@ -27,7 +27,7 @@ internal class UnnecesaryNestedTest(private val env: KotlinCoreEnvironment) {
       }
       """
 
-    val findings = UnnecesaryNested(Config.empty).compileAndLintWithContext(env, code)
+    val findings = UnnecessaryNested(Config.empty).compileAndLintWithContext(env, code)
     assertThat(findings).hasSize(1)
   }
 
@@ -50,7 +50,7 @@ internal class UnnecesaryNestedTest(private val env: KotlinCoreEnvironment) {
       }
       """
 
-    val findings = UnnecesaryNested(Config.empty).compileAndLintWithContext(env, code)
+    val findings = UnnecessaryNested(Config.empty).compileAndLintWithContext(env, code)
     assertThat(findings).hasSize(1)
   }
 
@@ -70,7 +70,7 @@ internal class UnnecesaryNestedTest(private val env: KotlinCoreEnvironment) {
       }
       """
 
-    val findings = UnnecesaryNested(Config.empty).compileAndLintWithContext(env, code)
+    val findings = UnnecessaryNested(Config.empty).compileAndLintWithContext(env, code)
     assertThat(findings).hasSize(1)
   }
 
@@ -89,7 +89,7 @@ internal class UnnecesaryNestedTest(private val env: KotlinCoreEnvironment) {
       }
       """
 
-    val findings = UnnecesaryNested(Config.empty).compileAndLintWithContext(env, code)
+    val findings = UnnecessaryNested(Config.empty).compileAndLintWithContext(env, code)
     assertThat(findings).hasSize(1)
   }
 
@@ -113,7 +113,7 @@ internal class UnnecesaryNestedTest(private val env: KotlinCoreEnvironment) {
       }
       """
 
-    val findings = UnnecesaryNested(Config.empty).compileAndLintWithContext(env, code)
+    val findings = UnnecessaryNested(Config.empty).compileAndLintWithContext(env, code)
     assertThat(findings).isEmpty()
   }
 
@@ -140,7 +140,7 @@ internal class UnnecesaryNestedTest(private val env: KotlinCoreEnvironment) {
       }
       """
 
-    val findings = UnnecesaryNested(Config.empty).compileAndLintWithContext(env, code)
+    val findings = UnnecessaryNested(Config.empty).compileAndLintWithContext(env, code)
     assertThat(findings).isEmpty()
   }
 }

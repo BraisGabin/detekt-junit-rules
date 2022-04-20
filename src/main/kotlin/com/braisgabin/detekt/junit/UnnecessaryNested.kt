@@ -14,7 +14,7 @@ import org.jetbrains.kotlin.psi.KtDeclaration
 import org.jetbrains.kotlin.psi.KtFile
 import org.jetbrains.kotlin.psi.psiUtil.siblings
 
-class UnnecesaryNested(config: Config) : Rule(config) {
+class UnnecessaryNested(config: Config) : Rule(config) {
   override val issue = Issue(
     javaClass.simpleName,
     Severity.CodeSmell,
