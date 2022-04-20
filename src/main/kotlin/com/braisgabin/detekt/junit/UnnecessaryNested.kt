@@ -36,7 +36,7 @@ class UnnecessaryNested(config: Config) : Rule(config) {
       }
 
       val body = classOrObject.body
-      if (body?.declarations.orEmpty().none { it.hasAnnotation("Test") }) {
+      if (body?.declarations.orEmpty().none { it.hasAnnotation("Test", "Nested") }) {
         report(
           CodeSmell(
             issue,

@@ -143,4 +143,38 @@ internal class UnnecessaryNestedTest(private val env: KotlinCoreEnvironment) {
     val findings = UnnecessaryNested(Config.empty).compileAndLintWithContext(env, code)
     assertThat(findings).isEmpty()
   }
+
+  @Test
+  fun `doesn't report3`() {
+    val code = """
+      import org.junit.jupiter.api.Test
+      import org.junit.jupiter.api.Nested
+
+      class A {
+        @Nested
+        class B {
+          @Nested
+          class C {
+            @Test
+            fun test() {
+            }
+          }
+
+          @Nested
+          class D {
+            @Test
+            fun test() {
+            }
+          }
+        }
+
+        @Test
+        fun test() {
+        }
+      }
+      """
+
+    val findings = UnnecessaryNested(Config.empty).compileAndLintWithContext(env, code)
+    assertThat(findings).isEmpty()
+  }
 }
