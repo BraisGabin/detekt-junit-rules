@@ -122,11 +122,12 @@ internal class UnnecessaryNestedTest(private val env: KotlinCoreEnvironment) {
     val code = """
       import org.junit.jupiter.api.Test
       import org.junit.jupiter.api.Nested
+      import org.junit.jupiter.params.ParameterizedTest
 
       class A {
         @Nested
         class B {
-          @Test
+          @ParameterizedTest
           fun test() {
           }
         }
