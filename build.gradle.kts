@@ -29,11 +29,7 @@ tasks.withType<KotlinCompile> {
 tasks.withType<Test>().configureEach {
   useJUnitPlatform()
   systemProperty("junit.jupiter.testinstance.lifecycle.default", "per_class")
-  val compileSnippetText: Boolean = if (project.hasProperty("compile-test-snippets")) {
-    (project.property("compile-test-snippets") as String).toBoolean()
-  } else {
-    false
-  }
+  val compileSnippetText: Boolean = project.hasProperty("compile-test-snippets")
   systemProperty("compile-snippet-tests", compileSnippetText)
 }
 
