@@ -30,6 +30,7 @@ internal class UnnecesaryNestedTest(private val env: KotlinCoreEnvironment) {
     val findings = UnnecesaryNested(Config.empty).compileAndLintWithContext(env, code)
     assertThat(findings).hasSize(1)
   }
+
   @Test
   fun `reports a Nested that doesn't have tests on it`() {
     val code = """
@@ -45,6 +46,26 @@ internal class UnnecesaryNestedTest(private val env: KotlinCoreEnvironment) {
 
         @Test
         fun test() {
+        }
+      }
+      """
+
+    val findings = UnnecesaryNested(Config.empty).compileAndLintWithContext(env, code)
+    assertThat(findings).hasSize(1)
+  }
+
+  @Test
+  fun `reports a Nested that doesn't have any other sibling`() {
+    val code = """
+      import org.junit.jupiter.api.Test
+      import org.junit.jupiter.api.Nested
+
+      class A {
+        @Nested
+        class B {
+          @Test
+          fun test() {
+          }
         }
       }
       """
@@ -88,6 +109,33 @@ internal class UnnecesaryNestedTest(private val env: KotlinCoreEnvironment) {
 
         @Test
         fun test() {
+        }
+      }
+      """
+
+    val findings = UnnecesaryNested(Config.empty).compileAndLintWithContext(env, code)
+    assertThat(findings).isEmpty()
+  }
+
+  @Test
+  fun `doesn't report 2`() {
+    val code = """
+      import org.junit.jupiter.api.Test
+      import org.junit.jupiter.api.Nested
+
+      class A {
+        @Nested
+        class B {
+          @Test
+          fun test() {
+          }
+        }
+
+        @Nested
+        class C {
+          @Test
+          fun test() {
+          }
         }
       }
       """

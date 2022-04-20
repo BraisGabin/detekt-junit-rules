@@ -8,8 +8,11 @@ import io.gitlab.arturbosch.detekt.api.Issue
 import io.gitlab.arturbosch.detekt.api.Rule
 import io.gitlab.arturbosch.detekt.api.Severity
 import io.gitlab.arturbosch.detekt.rules.hasAnnotation
+import org.jetbrains.kotlin.com.intellij.psi.PsiElement
 import org.jetbrains.kotlin.psi.KtClassOrObject
+import org.jetbrains.kotlin.psi.KtDeclaration
 import org.jetbrains.kotlin.psi.KtFile
+import org.jetbrains.kotlin.psi.psiUtil.siblings
 
 class UnnecesaryNested(config: Config) : Rule(config) {
   override val issue = Issue(
@@ -43,8 +46,24 @@ class UnnecesaryNested(config: Config) : Rule(config) {
         )
         return
       }
+
+      if (classOrObject.allKtDeclarationSiblings().none { it.hasAnnotation("Test", "Nested") }) {
+        report(
+          CodeSmell(
+            issue,
+            Entity.atName(classOrObject),
+            "The class ${classOrObject.name.orEmpty()} could be removed because it is the only child inside its parent`.",
+          )
+        )
+        return
+      }
     }
 
     super.visitClassOrObject(classOrObject)
   }
+}
+
+private fun PsiElement.allKtDeclarationSiblings(): Sequence<KtDeclaration> {
+  return (siblings(forward = false, withItself = false) + siblings(forward = true, withItself = false))
+    .mapNotNull { it as? KtDeclaration }
 }
