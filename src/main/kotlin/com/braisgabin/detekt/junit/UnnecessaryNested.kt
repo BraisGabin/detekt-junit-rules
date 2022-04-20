@@ -23,6 +23,8 @@ class UnnecessaryNested(config: Config) : Rule(config) {
   )
 
   override fun visitClassOrObject(classOrObject: KtClassOrObject) {
+    super.visitClassOrObject(classOrObject)
+
     if (classOrObject.hasAnnotation("Nested")) {
       if (classOrObject.parent is KtFile) {
         report(
@@ -36,7 +38,7 @@ class UnnecessaryNested(config: Config) : Rule(config) {
       }
 
       val body = classOrObject.body
-      if (body?.declarations.orEmpty().none { it.hasAnnotation("Test", "Nested", "ParameterizedTest") }) {
+      if (body?.declarations.orEmpty().none { it.hasAnnotation("Test", "Nested", "ParameterizedTest", "TestFactory") }) {
         report(
           CodeSmell(
             issue,
@@ -47,7 +49,7 @@ class UnnecessaryNested(config: Config) : Rule(config) {
         return
       }
 
-      if (classOrObject.allKtDeclarationSiblings().none { it.hasAnnotation("Test", "Nested", "ParameterizedTest") }) {
+      if (classOrObject.allKtDeclarationSiblings().none { it.hasAnnotation("Test", "Nested", "ParameterizedTest", "TestFactory") }) {
         report(
           CodeSmell(
             issue,
@@ -58,8 +60,6 @@ class UnnecessaryNested(config: Config) : Rule(config) {
         return
       }
     }
-
-    super.visitClassOrObject(classOrObject)
   }
 }
 
