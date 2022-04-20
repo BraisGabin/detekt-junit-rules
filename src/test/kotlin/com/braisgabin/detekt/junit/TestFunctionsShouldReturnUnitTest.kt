@@ -1,27 +1,14 @@
 package com.braisgabin.detekt.junit
 
-import io.github.detekt.test.utils.KotlinCoreEnvironmentWrapper
-import io.github.detekt.test.utils.createEnvironment
 import io.gitlab.arturbosch.detekt.api.Config
+import io.gitlab.arturbosch.detekt.rules.KotlinCoreEnvironmentTest
 import io.gitlab.arturbosch.detekt.test.compileAndLintWithContext
 import org.assertj.core.api.Assertions.assertThat
-import org.junit.After
-import org.junit.Before
-import org.junit.Test
+import org.jetbrains.kotlin.cli.jvm.compiler.KotlinCoreEnvironment
+import org.junit.jupiter.api.Test
 
-internal class TestFunctionsShouldReturnUnitTest {
-
-  private lateinit var env: KotlinCoreEnvironmentWrapper
-
-  @Before
-  fun setUp() {
-    env = createEnvironment()
-  }
-
-  @After
-  fun tearDown() {
-    env.dispose()
-  }
+@KotlinCoreEnvironmentTest
+internal class TestFunctionsShouldReturnUnitTest(private val env: KotlinCoreEnvironment) {
 
   @Test
   fun `don't report test function without defined Unit return type`() {
@@ -36,7 +23,7 @@ internal class TestFunctionsShouldReturnUnitTest {
       }
       """
 
-    val findings = TestFunctionsShouldReturnUnit(Config.empty).compileAndLintWithContext(env.env, code)
+    val findings = TestFunctionsShouldReturnUnit(Config.empty).compileAndLintWithContext(env, code)
     assertThat(findings).isEmpty()
   }
 
@@ -51,7 +38,7 @@ internal class TestFunctionsShouldReturnUnitTest {
       }
       """
 
-    val findings = TestFunctionsShouldReturnUnit(Config.empty).compileAndLintWithContext(env.env, code)
+    val findings = TestFunctionsShouldReturnUnit(Config.empty).compileAndLintWithContext(env, code)
     assertThat(findings).hasSize(1)
   }
 
@@ -67,7 +54,7 @@ internal class TestFunctionsShouldReturnUnitTest {
       }
       """
 
-    val findings = TestFunctionsShouldReturnUnit(Config.empty).compileAndLintWithContext(env.env, code)
+    val findings = TestFunctionsShouldReturnUnit(Config.empty).compileAndLintWithContext(env, code)
     assertThat(findings).isEmpty()
   }
 
@@ -84,7 +71,7 @@ internal class TestFunctionsShouldReturnUnitTest {
       }
       """
 
-    val findings = TestFunctionsShouldReturnUnit(Config.empty).compileAndLintWithContext(env.env, code)
+    val findings = TestFunctionsShouldReturnUnit(Config.empty).compileAndLintWithContext(env, code)
     assertThat(findings).hasSize(1)
   }
 
@@ -101,7 +88,7 @@ internal class TestFunctionsShouldReturnUnitTest {
       fun <T> same(value: T): T = value
       """
 
-    val findings = TestFunctionsShouldReturnUnit(Config.empty).compileAndLintWithContext(env.env, code)
+    val findings = TestFunctionsShouldReturnUnit(Config.empty).compileAndLintWithContext(env, code)
     assertThat(findings).hasSize(1)
   }
 
@@ -118,7 +105,7 @@ internal class TestFunctionsShouldReturnUnitTest {
       fun <T> same(value: T): T = value
       """
 
-    val findings = TestFunctionsShouldReturnUnit(Config.empty).compileAndLintWithContext(env.env, code)
+    val findings = TestFunctionsShouldReturnUnit(Config.empty).compileAndLintWithContext(env, code)
     assertThat(findings).isEmpty()
   }
 
@@ -134,7 +121,7 @@ internal class TestFunctionsShouldReturnUnitTest {
       }
       """
 
-    val findings = TestFunctionsShouldReturnUnit(Config.empty).compileAndLintWithContext(env.env, code)
+    val findings = TestFunctionsShouldReturnUnit(Config.empty).compileAndLintWithContext(env, code)
     assertThat(findings).hasSize(1)
   }
 
@@ -150,7 +137,7 @@ internal class TestFunctionsShouldReturnUnitTest {
       }
       """
 
-    val findings = TestFunctionsShouldReturnUnit(Config.empty).compileAndLintWithContext(env.env, code)
+    val findings = TestFunctionsShouldReturnUnit(Config.empty).compileAndLintWithContext(env, code)
     assertThat(findings).isEmpty()
   }
 
@@ -162,7 +149,7 @@ internal class TestFunctionsShouldReturnUnitTest {
       }
       """
 
-    val findings = TestFunctionsShouldReturnUnit(Config.empty).compileAndLintWithContext(env.env, code)
+    val findings = TestFunctionsShouldReturnUnit(Config.empty).compileAndLintWithContext(env, code)
     assertThat(findings).isEmpty()
   }
 }

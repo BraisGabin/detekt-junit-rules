@@ -18,9 +18,8 @@ dependencies {
   testImplementation("io.gitlab.arturbosch.detekt:detekt-test:1.20.0")
   testImplementation("io.gitlab.arturbosch.detekt:detekt-test-utils:1.20.0")
   testImplementation("org.assertj:assertj-core:3.22.0")
-  testImplementation("junit:junit:4.13.2")
-  testImplementation("org.junit.jupiter:junit-jupiter-api:5.8.2")
-  testImplementation("org.junit.jupiter:junit-jupiter-params:5.8.2")
+  testRuntimeOnly("junit:junit:4.13.2")
+  testImplementation("org.junit.jupiter:junit-jupiter:5.8.2")
 }
 
 tasks.withType<KotlinCompile> {
@@ -28,6 +27,8 @@ tasks.withType<KotlinCompile> {
 }
 
 tasks.withType<Test>().configureEach {
+  useJUnitPlatform()
+  systemProperty("junit.jupiter.testinstance.lifecycle.default", "per_class")
   val compileSnippetText: Boolean = if (project.hasProperty("compile-test-snippets")) {
     (project.property("compile-test-snippets") as String).toBoolean()
   } else {

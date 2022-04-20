@@ -1,28 +1,15 @@
 package com.braisgabin.detekt.junit
 
-import io.github.detekt.test.utils.KotlinCoreEnvironmentWrapper
-import io.github.detekt.test.utils.createEnvironment
 import io.gitlab.arturbosch.detekt.api.Config
+import io.gitlab.arturbosch.detekt.rules.KotlinCoreEnvironmentTest
 import io.gitlab.arturbosch.detekt.test.compileAndLintWithContext
 import io.gitlab.arturbosch.detekt.test.lintWithContext
 import org.assertj.core.api.Assertions.assertThat
-import org.junit.After
-import org.junit.Before
-import org.junit.Test
+import org.jetbrains.kotlin.cli.jvm.compiler.KotlinCoreEnvironment
+import org.junit.jupiter.api.Test
 
-internal class MissingTestAnnotationTest {
-
-  private lateinit var env: KotlinCoreEnvironmentWrapper
-
-  @Before
-  fun setUp() {
-    env = createEnvironment()
-  }
-
-  @After
-  fun tearDown() {
-    env.dispose()
-  }
+@KotlinCoreEnvironmentTest
+internal class MissingTestAnnotationTest(private val env: KotlinCoreEnvironment) {
 
   @Test
   fun `report function without @Test`() {
@@ -39,7 +26,7 @@ internal class MissingTestAnnotationTest {
       }
       """
 
-    val findings = MissingTestAnnotation(Config.empty).compileAndLintWithContext(env.env, code)
+    val findings = MissingTestAnnotation(Config.empty).compileAndLintWithContext(env, code)
     assertThat(findings).hasSize(1)
   }
 
@@ -58,7 +45,7 @@ internal class MissingTestAnnotationTest {
       }
       """
 
-    val findings = MissingTestAnnotation(Config.empty).compileAndLintWithContext(env.env, code)
+    val findings = MissingTestAnnotation(Config.empty).compileAndLintWithContext(env, code)
     assertThat(findings).hasSize(1)
   }
 
@@ -76,7 +63,7 @@ internal class MissingTestAnnotationTest {
       }
       """
 
-    val findings = MissingTestAnnotation(Config.empty).lintWithContext(env.env, code)
+    val findings = MissingTestAnnotation(Config.empty).lintWithContext(env, code)
     assertThat(findings).isEmpty()
   }
 
@@ -95,7 +82,7 @@ internal class MissingTestAnnotationTest {
       }
       """
 
-    val findings = MissingTestAnnotation(Config.empty).compileAndLintWithContext(env.env, code)
+    val findings = MissingTestAnnotation(Config.empty).compileAndLintWithContext(env, code)
     assertThat(findings).isEmpty()
   }
 
@@ -114,7 +101,7 @@ internal class MissingTestAnnotationTest {
       }
       """
 
-    val findings = MissingTestAnnotation(Config.empty).compileAndLintWithContext(env.env, code)
+    val findings = MissingTestAnnotation(Config.empty).compileAndLintWithContext(env, code)
     assertThat(findings).isEmpty()
   }
 
@@ -159,7 +146,7 @@ internal class MissingTestAnnotationTest {
       }
       """
 
-    val findings = MissingTestAnnotation(Config.empty).compileAndLintWithContext(env.env, code)
+    val findings = MissingTestAnnotation(Config.empty).compileAndLintWithContext(env, code)
     assertThat(findings).isEmpty()
   }
 
@@ -214,7 +201,7 @@ internal class MissingTestAnnotationTest {
       }
       """
 
-    val findings = MissingTestAnnotation(Config.empty).compileAndLintWithContext(env.env, code)
+    val findings = MissingTestAnnotation(Config.empty).compileAndLintWithContext(env, code)
     assertThat(findings).isEmpty()
   }
 
@@ -233,7 +220,7 @@ internal class MissingTestAnnotationTest {
       }
       """
 
-    val findings = MissingTestAnnotation(Config.empty).compileAndLintWithContext(env.env, code)
+    val findings = MissingTestAnnotation(Config.empty).compileAndLintWithContext(env, code)
     assertThat(findings).isEmpty()
   }
 
@@ -259,7 +246,7 @@ internal class MissingTestAnnotationTest {
       }
       """
 
-    val findings = MissingTestAnnotation(Config.empty).compileAndLintWithContext(env.env, code)
+    val findings = MissingTestAnnotation(Config.empty).compileAndLintWithContext(env, code)
     assertThat(findings).isEmpty()
   }
 
@@ -280,7 +267,7 @@ internal class MissingTestAnnotationTest {
       }
       """
 
-    val findings = MissingTestAnnotation(Config.empty).compileAndLintWithContext(env.env, code)
+    val findings = MissingTestAnnotation(Config.empty).compileAndLintWithContext(env, code)
     assertThat(findings).isEmpty()
   }
 }
