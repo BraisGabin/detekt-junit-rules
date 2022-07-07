@@ -13,6 +13,7 @@ class JUnitRuleSetProvider : RuleSetProvider {
       listOf(
         MissingTestAnnotation(config),
         TestFunctionsShouldReturnUnit(config),
+        UnnecessaryNested(config),
       ),
     )
   }
