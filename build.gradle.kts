@@ -19,7 +19,7 @@ dependencies {
   testImplementation("io.gitlab.arturbosch.detekt:detekt-test-utils:1.21.0")
   testImplementation("org.assertj:assertj-core:3.23.1")
   testRuntimeOnly("junit:junit:4.13.2")
-  testImplementation("org.junit.jupiter:junit-jupiter:5.8.2")
+  testImplementation("org.junit.jupiter:junit-jupiter:5.9.0")
 }
 
 tasks.withType<KotlinCompile> {
