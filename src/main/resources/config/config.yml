@@ -4,3 +4,5 @@ JUnit:
     active: true
   TestFunctionsShouldReturnUnit:
     active: true
+  UnnecessaryNested:
+    active: true
