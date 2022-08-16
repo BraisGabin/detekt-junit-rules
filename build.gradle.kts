@@ -2,15 +2,15 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
   kotlin("jvm") version "1.6.21"
-  `maven-publish`
 }
 
-group = "com.braisgabin.detekt"
-version = "1.0.0-SNAPSHOT"
-
-repositories {
-  mavenCentral()
+buildscript {
+  dependencies {
+    classpath("com.vanniktech:gradle-maven-publish-plugin:0.21.0")
+  }
 }
+
+apply(plugin="com.vanniktech.maven.publish")
 
 dependencies {
   compileOnly("io.gitlab.arturbosch.detekt:detekt-api:1.21.0")
@@ -31,12 +31,4 @@ tasks.withType<Test>().configureEach {
   systemProperty("junit.jupiter.testinstance.lifecycle.default", "per_class")
   val compileSnippetText: Boolean = project.hasProperty("compile-test-snippets")
   systemProperty("compile-snippet-tests", compileSnippetText)
-}
-
-publishing {
-  publications {
-    create<MavenPublication>("mavenJava") {
-      from(components["java"])
-    }
-  }
 }
