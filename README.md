@@ -12,24 +12,9 @@ dependencies {
 }
 ```
 
-Right now the project is on [jitpack]. So you need to have that repo configured too.
-
 ## Configuration
 
-Remember that, by default, all the rules aren't enable. To activate the rules you need to write something like this in your
-yaml configuration:
+If you use detekt `1.21.0` or later all works out of the box. If you don't you should copy the content of [this file][config.yml]
+inside your detekt configuration to make able to run the rules.
 
-```yaml
-## This should be set at the top of your config:
-config:
-  # ...
-  excludes: "JUnit"
-
-JUnit:
-  TestFunctionsShouldReturnUnit:
-    active: true
-  MissingTestAnnotation:
-    active: true
-```
-
-  [jitpack]: https://jitpack.io/#BraisGabin/detekt-junit-rules
+  [config.yml]: https://github.com/BraisGabin/detekt-junit-rules/blob/main/src/main/resources/config/config.yml
