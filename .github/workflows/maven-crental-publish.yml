@@ -51,7 +51,7 @@ jobs:
       uses: softprops/action-gh-release@v1
       with:
         files: |
-          build/libs/detekt-junit-${{ inputs.version }}.jar
+          build/libs/detekt-junit.jar
         tag_name: ${{ inputs.version }}
         name: v${{ inputs.version }}
         draft: true
