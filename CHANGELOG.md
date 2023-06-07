@@ -1,5 +1,8 @@
 # Change Log
 
+## Version 0.0.6 *(2023-06-07)*
+- `MissingTestAnnotationTest` ignore functions in enum classes
+
 ## Version 0.0.5 *(2022-08-21)*
 - Implement `UnnecesaryNested`
 
