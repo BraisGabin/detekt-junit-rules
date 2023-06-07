@@ -9,6 +9,8 @@ import io.gitlab.arturbosch.detekt.api.Rule
 import io.gitlab.arturbosch.detekt.api.Severity
 import io.gitlab.arturbosch.detekt.rules.hasAnnotation
 import io.gitlab.arturbosch.detekt.rules.isOverride
+import org.jetbrains.kotlin.lexer.KtModifierKeywordToken
+import org.jetbrains.kotlin.lexer.KtTokens
 import org.jetbrains.kotlin.psi.KtFile
 import org.jetbrains.kotlin.psi.KtNamedFunction
 import org.jetbrains.kotlin.psi.psiUtil.containingClass
@@ -35,6 +37,7 @@ class MissingTestAnnotation(config: Config) : Rule(config) {
 
     val clazz = function.containingClassOrObject ?: return
     if (clazz.name == null) return
+    if (clazz.hasModifier(KtTokens.ENUM_KEYWORD)) return
 
     if (
       !function.hasAnnotation(

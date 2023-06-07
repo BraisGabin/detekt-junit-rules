@@ -270,4 +270,21 @@ internal class MissingTestAnnotationTest(private val env: KotlinCoreEnvironment)
     val findings = MissingTestAnnotation(Config.empty).compileAndLintWithContext(env, code)
     assertThat(findings).isEmpty()
   }
+
+  @Test
+  fun `don't report functions in enum classes without @Test`() {
+    val code = """
+      import org.junit.Test
+
+      enum class A {
+        Foo;
+
+        fun test() {
+        }
+      }
+      """
+
+    val findings = MissingTestAnnotation(Config.empty).compileAndLintWithContext(env, code)
+    assertThat(findings).isEmpty()
+  }
 }
