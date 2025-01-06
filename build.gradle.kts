@@ -17,7 +17,7 @@ dependencies {
 
   testImplementation("io.gitlab.arturbosch.detekt:detekt-test:1.23.7")
   testImplementation("io.gitlab.arturbosch.detekt:detekt-test-utils:1.23.7")
-  testImplementation("org.assertj:assertj-core:3.27.1")
+  testImplementation("org.assertj:assertj-core:3.27.2")
   testRuntimeOnly("junit:junit:4.13.2")
   testImplementation("org.junit.jupiter:junit-jupiter:5.11.4")
 }
