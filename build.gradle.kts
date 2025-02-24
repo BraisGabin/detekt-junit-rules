@@ -18,8 +18,8 @@ dependencies {
   testImplementation("io.gitlab.arturbosch.detekt:detekt-test:1.23.8")
   testImplementation("io.gitlab.arturbosch.detekt:detekt-test-utils:1.23.8")
   testImplementation("org.assertj:assertj-core:3.27.3")
-  testRuntimeOnly("junit:junit:4.13.2")
   testImplementation("org.junit.jupiter:junit-jupiter:5.11.4")
+  testRuntimeOnly("org.junit.platform:junit-platform-launcher")
 }
 
 kotlin {
